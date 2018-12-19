@@ -1,25 +1,47 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { linearSearch } from './search'
+
+console.log(linearSearch);
 
 class App extends Component {
+
+  constructor(props) {
+      super(props)  
+      this.state = {
+      dataset: [89, 30, 25, 32, 72, 70, 51, 42],
+      searchTerm: null,
+      result: null
+    }
+    
+  }
+
+
+  onClick(e) {
+    e.preventDefault();
+    console.log(this.state.searchTerm)
+    console.log(this.state.dataset)
+    this.setState( 
+    {
+     result: linearSearch(Number(this.state.searchTerm), this.state.dataset)
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <form >
+          <label htmlFor="searchTerm">Enter search number:</label>
+          <input onChange=
+            {e => this.setState({
+                searchTerm: e.target.value
+              })} type="number" id="searchTerm"></input>
+          <button onClick={(e => this.onClick(e))}>Submit</button>
+        </form>
+        <div>
+          {this.state.result}
+        </div>
       </div>
     );
   }
