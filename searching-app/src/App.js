@@ -11,6 +11,7 @@ class App extends Component {
     super(props)
     this.state = {
       dataset: [89, 30, 25, 32, 72, 70, 51, 42],
+      sortedDataset: [89, 30, 25, 32, 72, 70, 51, 42].sort(),
       searchTerm: null,
       result: null
     }
@@ -30,9 +31,9 @@ class App extends Component {
 
   onClickBinary(e) {
     e.preventDefault();
-    let sortedData = this.state.dataset.sort();
+    // let sortedData = this.state.dataset.sort();
     this.setState({
-      result: binarySearch(Number(this.state.searchTerm), sortedData)
+      result: binarySearch(Number(this.state.searchTerm), this.state.sortedDataset)
     })
   }
   render() {
